@@ -63,6 +63,35 @@ class TaskController {
       next( e );
     }
   }
+
+  async getTasks (req, res, next) {
+    try {
+
+      const {
+        authorizationData: {
+          id: userId
+        }
+      } = req;
+
+      const tasks = await Task.findAll(
+        /*
+         * IT MUST NOT BE HERE
+         * */
+        {
+          offset: req.query.offset,
+          limit: req.query.limit,
+          order: [['deadline', req.query.sort || 'ASC']],
+          where: {
+            userId,
+          }
+        } )
+      ;
+      res.send( tasks );
+    } catch (e) {
+      next( e );
+    }
+  }
+
 }
 
 export default new TaskController();

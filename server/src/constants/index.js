@@ -3,6 +3,20 @@ export const LOGIN_PATTERN = /^(?!.*?[ \\/\[\]:;|=,+*?<>]).{6,16}$/;
 export const PASSWORD_PATTERN = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?\d)[A-Za-z0-9_@#%!?^\-]{8,60}$/;
 
 /**
+ * @typedef {string} RoleType
+ */
+
+/**
+ *@readonly
+ * @enum {RoleType}
+ */
+export const ROLE = Object.freeze( {
+                                     USER: 'USER',
+                                     ADMIN: 'ADMIN',
+                                     MODERATOR: 'MODERATOR',
+                                   } );
+
+/**
  * @typedef {Symbol} ActionType
  */
 
@@ -18,7 +32,7 @@ export const ACTION = Object.freeze( {
                                      } );
 
 /**
- * @typedef {Symbol} EntityType
+ * @typedef {string} EntityType
  */
 
 /**
@@ -26,20 +40,7 @@ export const ACTION = Object.freeze( {
  * @enum {EntityType}
  */
 export const ENTITY = Object.freeze( {
-                                       USER: Symbol( 'USER' ),
-                                       TASK: Symbol( 'TASK' ),
+                                       ...ROLE,
+                                       TASK: 'TASK',
                                      } );
 
-/**
- * @typedef {string} RoleType
- */
-
-/**
- *@readonly
- * @enum {RoleType}
- */
-export const ROLE = Object.freeze( {
-                                     USER: 'USER',
-                                     ADMIN: 'ADMIN',
-                                     MODERATOR: 'MODERATOR',
-                                   } );
